@@ -1,0 +1,37 @@
+---
+import { CONTENT, type Lang } from "../data/content";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const a = CONTENT[lang].about;
+---
+
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head__index reveal">{a.idx}</div>
+      <h2 class="section-head__title reveal" data-delay="1" set:html={a.title} />
+    </div>
+    <div class="about__grid">
+      <div>
+        <p class="about__lede reveal" set:html={a.lede} />
+        <div class="about__body reveal" data-delay="1">
+          {a.body.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </div>
+      <div class="about__stats reveal" data-delay="2">
+        {
+          a.stats.map((s) => (
+            <div class="about__stat">
+              <div class="num">{s.num}<em>{s.suffix}</em></div>
+              <div class="label">{s.label}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

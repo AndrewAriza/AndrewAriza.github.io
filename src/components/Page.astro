@@ -1,0 +1,29 @@
+---
+import About from "./About.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import Hero from "./Hero.astro";
+import Marquee from "./Marquee.astro";
+import Nav from "./Nav.astro";
+import Stack from "./Stack.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import type { Lang } from "../data/content";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<BaseLayout lang={lang}>
+  <Nav lang={lang} />
+  <main>
+    <Hero lang={lang} />
+    <Marquee lang={lang} />
+    <About lang={lang} />
+    <Stack lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>

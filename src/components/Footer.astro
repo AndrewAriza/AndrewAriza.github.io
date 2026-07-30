@@ -1,0 +1,22 @@
+---
+import { CONTENT, type Lang } from "../data/content";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const f = CONTENT[lang].footer;
+---
+
+<footer class="footer">
+  <span>{f.left}</span>
+  <span class="footer__made">
+    {f.right}
+    <svg class="footer__flag" viewBox="0 0 12 8" aria-label="Colombia" role="img">
+      <rect width="12" height="4" fill="#FCD116"></rect>
+      <rect y="4" width="12" height="2" fill="#003893"></rect>
+      <rect y="6" width="12" height="2" fill="#CE1126"></rect>
+    </svg>
+  </span>
+</footer>

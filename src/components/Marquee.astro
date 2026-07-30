@@ -1,0 +1,18 @@
+---
+import { CONTENT, type Lang } from "../data/content";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const items = CONTENT[lang].marquee;
+// duplicated once: the track scrolls -50% so the loop is seamless
+const track = [...items, ...items];
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    {track.map((item) => <span>{item}</span>)}
+  </div>
+</div>

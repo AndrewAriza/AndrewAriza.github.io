@@ -1,0 +1,32 @@
+---
+import { CONTENT, EMAIL, SOCIAL_URLS, type Lang } from "../data/content";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = CONTENT[lang].contact;
+---
+
+<section id="contact" class="contact">
+  <div class="container">
+    <h2 class="contact__overline reveal">{c.overline}</h2>
+    <a class="contact__mail reveal" data-delay="1" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+    <p class="contact__sub reveal" data-delay="2">{c.sub}</p>
+    <div class="contact__socials reveal" data-delay="3">
+      {
+        c.socials.map((name) => (
+          <a
+            href={SOCIAL_URLS[name]}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${name} — Andrés Ariza`}
+          >
+            {name} ↗
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

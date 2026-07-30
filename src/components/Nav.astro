@@ -1,0 +1,46 @@
+---
+import { CONTENT, LOCALES, type Lang } from "../data/content";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = CONTENT[lang];
+---
+
+<nav class="nav">
+  <a
+    href="https://github.com/AndrewAriza"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="nav__brand"
+    aria-label="andrewariza — GitHub"
+  >
+    <span class="nav__brand-dot"></span>
+    andrewariza
+  </a>
+  <div class="nav__links">
+    <a href="#stack">{t.nav.stack}</a>
+    <div class="lang-toggle" role="group" aria-label={t.meta.langSwitch}>
+      {
+        LOCALES.map((l) => (
+          <a
+            class:list={["lang-opt", { "is-active": l.lang === lang }]}
+            href={l.path}
+            hreflang={l.lang}
+            lang={l.lang}
+            aria-label={`${l.name} (${l.label})`}
+            aria-current={l.lang === lang ? "page" : undefined}
+          >
+            {l.label}
+          </a>
+        ))
+      }
+    </div>
+    <a href="#contact" class="cta">
+      <span class="cta__dot"></span>
+      {t.nav.cta}
+    </a>
+  </div>
+</nav>

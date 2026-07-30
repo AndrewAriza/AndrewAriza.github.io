@@ -1,0 +1,36 @@
+---
+import { CONTENT, type Lang } from "../data/content";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = CONTENT[lang].stack;
+---
+
+<section id="stack">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head__index reveal">{s.idx}</div>
+      <h2 class="section-head__title reveal" data-delay="1" set:html={s.title} />
+    </div>
+    <div class="stack__grid reveal" data-delay="2">
+      {
+        s.cols.map((col) => (
+          <div class="stack__col">
+            <h3 class="stack__col-title">{col.title}</h3>
+            <ul class="stack__list">
+              {col.list.map(([name, level]) => (
+                <li>
+                  <span>{name}</span>
+                  <span class="y">{level}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

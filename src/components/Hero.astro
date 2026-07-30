@@ -1,0 +1,52 @@
+---
+import { Image } from "astro:assets";
+import profile from "../assets/profile.jpg";
+import { CONTENT, type Lang } from "../data/content";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = CONTENT[lang];
+const h = t.hero;
+---
+
+<section class="hero" id="top">
+  <div class="container">
+    <div class="hero__top">
+      <div class="hero__top-text">
+        <div class="hero__eyebrow reveal">{h.eyebrow}</div>
+        <h1 class="hero__title reveal" data-cursor="text" data-delay="1">
+          {h.name1}<br />
+          {h.name2}<em>.</em>
+          <span class="sr-only"> — {h.roleValue}</span>
+        </h1>
+        <div class="hero__role reveal" data-delay="2">
+          <div class="hero__role-item">
+            <span class="label">{h.roleLabel}</span>
+            <span>{h.roleValue}</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero__photo reveal" data-delay="0">
+        <div class="hero__photo-ring"></div>
+        <Image src={profile} alt={t.meta.photoAlt} width={480} densities={[1, 2]} loading="eager" />
+      </div>
+    </div>
+
+    <div class="hero__bottom">
+      <p class="hero__intro reveal" data-delay="3">{h.intro}</p>
+      <div class="hero__meta reveal" data-delay="4">
+        <div class="hero__meta-row">
+          <span>{h.statusLabel}</span>
+          <span class="v live">{h.statusValue}</span>
+        </div>
+        <div class="hero__meta-row">
+          <span>{h.yearsLabel}</span>
+          <span class="v">{h.yearsValue}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
