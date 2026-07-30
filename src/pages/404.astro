@@ -1,0 +1,75 @@
+---
+// GitHub Pages serves dist/404.html for any unmatched path, in both locales,
+// so this page carries the two languages side by side.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import Nav from "../components/Nav.astro";
+---
+
+<BaseLayout lang="es" noindex title="404 — Andrés Ariza">
+  <Nav lang="es" />
+  <main>
+    <section class="notfound">
+      <div class="container">
+        <div class="notfound__code">404</div>
+        <h1 class="notfound__title">Página no encontrada</h1>
+        <p class="notfound__sub">
+          Esta ruta no existe. <span lang="en">This page doesn't exist.</span>
+        </p>
+        <div class="notfound__links">
+          <a href="/">Inicio ↗</a>
+          <a href="/en/" lang="en">Home ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer lang="es" />
+</BaseLayout>
+
+<style>
+  .notfound {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+  }
+  .notfound__code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .notfound__title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 8vw, 120px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    font-weight: 500;
+    margin: 0;
+  }
+  .notfound__sub {
+    margin-top: 24px;
+    color: var(--ink-2);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .notfound__sub span {
+    color: var(--ink-3);
+  }
+  .notfound__links {
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-3);
+  }
+  .notfound__links a {
+    transition: color 240ms var(--t-base);
+  }
+  .notfound__links a:hover {
+    color: var(--ink);
+  }
+</style>

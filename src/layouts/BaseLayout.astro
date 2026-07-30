@@ -9,9 +9,12 @@ import { CONTENT, LOCALES, type Lang } from "../data/content";
 
 interface Props {
   lang: Lang;
+  /** 404 and friends: keep them out of the index but let crawlers follow links out */
+  noindex?: boolean;
+  title?: string;
 }
 
-const { lang: pageLang } = Astro.props;
+const { lang: pageLang, noindex = false, title } = Astro.props;
 const t = CONTENT[pageLang];
 const site = Astro.site ?? new URL("https://andrewariza.github.io/");
 const locale = LOCALES.find((l) => l.lang === pageLang)!;
@@ -24,17 +27,24 @@ const ogImage = new URL("og.png", site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{t.meta.title}</title>
+    <title>{title ?? t.meta.title}</title>
     <meta name="description" content={t.meta.description} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <link rel="canonical" href={canonical.href} />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex, follow" />
+      ) : (
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+      )
+    }
+    {!noindex && <link rel="canonical" href={canonical.href} />}
 
     {
-      LOCALES.map((l) => (
-        <link rel="alternate" hreflang={l.lang} href={new URL(l.path, site).href} />
-      ))
+      !noindex &&
+        LOCALES.map((l) => (
+          <link rel="alternate" hreflang={l.lang} href={new URL(l.path, site).href} />
+        ))
     }
-    <link rel="alternate" hreflang="x-default" href={new URL("/", site).href} />
+    {!noindex && <link rel="alternate" hreflang="x-default" href={new URL("/", site).href} />}
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Andrés Ariza" />

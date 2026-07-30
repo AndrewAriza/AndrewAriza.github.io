@@ -12,6 +12,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      filter: (page) => !page.endsWith('/404'),
       i18n: {
         defaultLocale: 'es',
         // keep these identical to the <link rel="alternate" hreflang> tags in BaseLayout
