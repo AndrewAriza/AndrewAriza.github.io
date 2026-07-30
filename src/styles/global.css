@@ -587,6 +587,8 @@ section + section { border-top: 1px solid var(--border); }
   padding: clamp(120px, 16vw, 200px) 0 60px;
   position: relative;
 }
+/* the mail size is derived from this box, so 100cqw == the width it must fit in */
+.contact > .container { container-type: inline-size; }
 .contact__overline {
   margin: 0 0 32px;
   font-weight: 400;
@@ -602,7 +604,8 @@ section + section { border-top: 1px solid var(--border); }
 }
 .contact__mail {
   font-family: var(--font-display);
-  font-size: clamp(22px, 6.8vw, 120px);
+  /* 12.9em = measured advance width of the address at weight 500, plus slack */
+  font-size: clamp(20px, calc(100cqw / 12.9), 120px);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 1;
