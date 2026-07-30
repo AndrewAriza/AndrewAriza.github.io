@@ -16,28 +16,29 @@ const h = t.hero;
   <div class="container">
     <div class="hero__top">
       <div class="hero__top-text">
-        <div class="hero__eyebrow reveal">{h.eyebrow}</div>
-        <h1 class="hero__title reveal" data-cursor="text" data-delay="1">
+        <div class="hero__eyebrow reveal-load">{h.eyebrow}</div>
+        <h1 class="hero__title reveal-load" data-cursor="text" data-delay="1">
           {h.name1}<br />
           {h.name2}<em>.</em>
           <span class="sr-only"> — {h.roleValue}</span>
         </h1>
-        <div class="hero__role reveal" data-delay="2">
+        <div class="hero__role reveal-load" data-delay="2">
           <div class="hero__role-item">
             <span class="label">{h.roleLabel}</span>
             <span>{h.roleValue}</span>
           </div>
         </div>
       </div>
-      <div class="hero__photo reveal" data-delay="0">
+      <div class="hero__photo reveal-load" data-delay="0">
         <div class="hero__photo-ring"></div>
-        <Image src={profile} alt={t.meta.photoAlt} width={480} densities={[1, 2]} loading="eager" />
+        <!-- rendered at most 240px wide (.hero__photo clamp), so 240 @2x is the ceiling -->
+        <Image src={profile} alt={t.meta.photoAlt} width={240} densities={[1, 2]} loading="eager" />
       </div>
     </div>
 
     <div class="hero__bottom">
-      <p class="hero__intro reveal" data-delay="3">{h.intro}</p>
-      <div class="hero__meta reveal" data-delay="4">
+      <p class="hero__intro reveal-load" data-delay="3">{h.intro}</p>
+      <div class="hero__meta reveal-load" data-delay="4">
         <div class="hero__meta-row">
           <span>{h.statusLabel}</span>
           <span class="v live">{h.statusValue}</span>

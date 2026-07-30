@@ -10,11 +10,6 @@ function initNav() {
   window.addEventListener("scroll", onScroll, { passive: true });
 }
 
-function initLoader() {
-  setTimeout(() => document.getElementById("loader")?.classList.add("is-out"), 700);
-}
-
 initNav();
 initCursor();
 initReveal();
-initLoader();
